@@ -1,0 +1,145 @@
+db.sales.aggregate(
+   [
+     {
+       $group:
+         {
+           _id: "$item",
+           avgAmount: { $avg: { $multiply: [ "$price", "$quantity" ] } },
+           avgQuantity: { $avg: "$quantity" }
+         }
+     }
+   ]
+)
+
+
+
+
+db.sales.aggregate(
+   [
+     {
+       $group:
+         {
+           _id: "$item",
+           avgAmount: { $avg: { $multiply: [ "$price", "$quantity" ] } },
+           avgQuantity: { $avg: "$quantity" }
+         }
+     }
+   ]
+)
+
+db.moviesSunday.aggregate([{$group:{_id: "$title",avgRating: { $avg: "$ratings" }}}])
+
+db.moviesSunday.aggregate([
+ // unwind the coordinates into separate docs
+ {$unwind: "$ratings"},
+
+ // group back into single docs, projecting the first and last
+ // coordinates as lng and lat, respectively
+ {$group: {
+   _id: "$title",
+   ratingVar: {$first: "$rating"},
+ }},
+
+ // then group as normal for the averaging
+ {$group: {
+   _id: 0,
+   finalAvg: {$avg: "$ratingVar"},
+   
+ }}
+ 
+ 
+ 
+ b.test.insert({username:"Alex", tags: ['C#', 'Java', 'C++'] });
+db.test.aggregate(
+  {$match: {username : "Alex"}}, 
+  {$unwind: "$tags"},
+  {$project: {count:{$add:1}}},
+  {$group: {_id: null, number: {$sum: "$count" }}}
+);
+{ "result" : [ { "_id" : null, "number" : 3 } ], "ok" : 1 }
+ 
+ 
+  b.test.insert({username:"Alex", tags: ['C#', 'Java', 'C++'] });
+db.movies5_17b.aggregate(
+  {$match: {"title" : /Space/}}, 
+  {$unwind: "$ratings"},
+  {$project: {count:{$add:1}}},
+  {$group: {_id: title, number: {$sum: "$count" }}}
+);
+{ "result" : [ { "_id" : null, "number" : 3 } ], "ok" : 1 }
+ 
+ 
+ 
+ 
+ 
+ 
+]);
+
+
+{ title : title of article", ...
+  ratings: [
+         { voter: "user1", score: 5 },
+         { voter: "user2", score: 8 },
+         { voter: "user3", score: 7 }
+  ]
+}
+
+db.moviesSunday.aggregate(
+[{$unwind: "$ratings"},
+  {$group : {_id : "$ratings.voter", averageScore: {$avg:"$ratings.score"} } } 
+]);
+
+// this works BEST ONE HERE
+
+
+
+db.moviesSunday.aggregate(
+[{$unwind: "$ratings"},
+  {$group : {_id : "$title", averageRating: {$avg:"$ratings.rating"} } } ,
+  {$sort : {averageRating:-1}}
+]);
+
+
+db.moviesSunday.aggregate(
+[{$unwind: "$ratings"},
+  {$group : {_id : "$title", averageRating: {$avg:"$ratings.rating"} } } ,
+  {$sort : {averageRating:-1}}
+]);
+
+get number of ratings per movie
+db.movies5_20_9.aggregate(
+[
+{
+$project:{
+movieId: 1,
+numberOfRatings : {$size: "$ratings"}
+}
+}
+]);
+
+"ratings" : [
+		{
+			"rating" : 3,
+			"userId" : "112"
+		},
+		{
+			"rating" : 4,
+			"userId" : "182"
+		},
+		{
+			"rating" : 4,
+			"userId" : "289"
+		},
+		{
+	
+
+
+
+db.movies5_20_9.find({"title": {/2001/}, $and: [{"tags.userId":{"$in":["146"]} ]).pretty()
+
+db.movies5_20_9.find({"tags.userId":{"$in":["146"]}).pretty()
+
+
+
+
+db.moviesSunday.aggregate({$match: {title: /Brassed/}}, {$unwind:"$ratings"}, {$project: {_id:0,q:"$query",i:"$rating.ratinq"}})
